@@ -11,7 +11,8 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, outputDirectory),
-        filename: '[name].js'
+        filename: '[name].js',
+        publicPath: '/'
     },
     devtool: "source-map",
     plugins: [
