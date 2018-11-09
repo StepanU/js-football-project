@@ -1,0 +1,16 @@
+
+.leftBar {
+    background-color: red;
+    display: inline-block;
+    vertical-align:top;
+    width: 20%;
+}
+.rightPart{
+    background-color: limegreen;
+    display: inline-block;
+    width: 80%;
+}
+
+.mainBar{
+    background-color: purple;
+}
