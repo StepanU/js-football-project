@@ -22,11 +22,11 @@ class Template extends React.Component {
         return (
             <React.Fragment>
                 {this.props.isLoading && <LinearProgress color="secondary" />}
-                {this.props.isFailed && <div>Ой-ой :(</div>}
+                {this.props.isFailed && <img src={"https://okdiario.com/img/2018/03/13/como-calcular-porcentaje-de-error-655x368.jpg"} className={"im"}></img>}
 
                     {this.props.leagues.map((doc) => (
                                     <div  key={doc.league_id} onClick={() => {this.props.selectArticle(doc.league_id)}}>
-                                            <Button   variant="contained" color="primary" className="league" component={Link} to="/schedule">
+                                            <Button  id={"leagueButton"} variant="contained" color="primary" className="league" component={Link} to="/schedule">
                                                 {doc.country_name} {doc.league_name}
                                             </Button>
                                     </div>

@@ -24,7 +24,7 @@ class Schedule extends React.Component {
      }
 
      getLeague() {
-        if (this.props.countries[0] == 404) {
+        if (this.props.countries[0] == 404 || this.props.countries[0] == 201) {
             return "No matches"
         }
         else if (this.props.countries[0]){
@@ -48,7 +48,7 @@ class Schedule extends React.Component {
                         <div className="calendar"><Search/></div>
                     </div>
                     {this.props.isLoading && <LinearProgress color="secondary" />}
-                    {this.props.isFailed && <img src={"https://okdiario.com/img/2018/03/13/como-calcular-porcentaje-de-error-655x368.jpg"}></img>}
+                    {this.props.isFailed && <img src={"https://okdiario.com/img/2018/03/13/como-calcular-porcentaje-de-error-655x368.jpg"} className={"im"}></img>}
                     <div className="mathes">
                         {this.getLeague()!== "No matches" && this.props.countries.map((doc) => (
                             <div className={"match"} key={doc.match_id }>

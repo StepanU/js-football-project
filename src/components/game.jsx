@@ -21,7 +21,7 @@ export class Game extends React.Component {
 
 
                 {this.props.isLoading && <LinearProgress color="secondary" />}
-                {this.props.isFailed && <div>Ой-ой :(</div>}
+                {this.props.isFailed && <img src={"https://okdiario.com/img/2018/03/13/como-calcular-porcentaje-de-error-655x368.jpg"} className={"im"}></img>}
                 {this.props.game.length > 0 && <div className={"gameLeagueName"}>{this.props.game[0].country_name} {this.props.game[0].league_name}</div>}
                 {this.props.game.length > 0 && <div className={"gameDate"}>{this.props.game[0].match_date}</div>}
                 {this.props.game.length > 0 && <div className={"gameTime"}>{this.props.game[0].match_time}</div>}

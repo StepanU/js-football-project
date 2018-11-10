@@ -16,7 +16,7 @@ const App = () => (
         <Router>
             <div className="pole">
 
-                <Button variant="contained" color="primary" component={Link} className="mainBar" fullWidth = "true" to="/about">
+                <Button variant="contained" color="primary" component={Link} id="mainBar" fullWidth = "true" to="/about">
                     Football Score
                 </Button>
                 <div className="leftBar"><ConnectedTemplate/></div>
@@ -26,7 +26,7 @@ const App = () => (
                             <Route exact path='/' component  = { ConnectedSchedule }  />
                             <Route exact path='/schedule' component  = { ConnectedSchedule }  />
                             <Route path='/schedule/:id' component  = { ConnectedGame }   />
-                        <Route render = {() => (<img src = "https://www.lifewire.com/thmb/OO7CD06NAdoIwv71DgUgBiTd4ps=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/shutterstock_325494917-5a68d8403418c600190a3e1f.jpg"></img>)}/>
+                        <Route render = {() => (<img src = "https://www.lifewire.com/thmb/OO7CD06NAdoIwv71DgUgBiTd4ps=/768x0/filters:no_upscale():max_bytes(150000):strip_icc()/shutterstock_325494917-5a68d8403418c600190a3e1f.jpg" className={"im"}></img>)}/>
                     </Switch>
                 </div>
                 <div className="footer"></div>
