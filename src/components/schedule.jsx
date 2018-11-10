@@ -2,28 +2,32 @@ import React from 'react'
 import {connect} from "react-redux";
 import {loadCountries} from "../actions";
 import {Link} from "react-router-dom";
-import Button from "@material-ui/core/Button/Button";
+import Button from "@material-ui/core/Button/Button"
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Search from "./search"
+import "../css/main.css"
 
 
 class Schedule extends React.Component {
     constructor(props) {
         super(props)
-        if(this.props.selectedArticle)
-             this.props.loadCountries(this.props.selectedArticle)
+        if(this.props.selectedArticle && this.props.date)
+             this.props.loadCountries(this.props.selectedArticle, this.props.date)
     }
 
      shouldComponentUpdate(nextProps, nextState) {
-         if (nextProps.selectedArticle !== this.props.selectedArticle) {
-             this.props.loadCountries(nextProps.selectedArticle)
+        console.log("upd")
+         if (nextProps.date && (nextProps.selectedArticle !== this.props.selectedArticle || nextProps.date !== this.props.date)) {
+             this.props.loadCountries(nextProps.selectedArticle, nextProps.date.values.page)
          }
          return true
      }
 
      getLeague() {
-        if (this.props.countries.length == 0) {
-            return ""
+        if (this.props.countries[0] == 404) {
+            return "No matches"
         }
-        else{
+        else if (this.props.countries[0]){
             return this.props.countries[0].country_name + " " + this.props.countries[0].league_name
         }
      }
@@ -34,21 +38,40 @@ class Schedule extends React.Component {
 
 
     render() {
+
         return (
             <React.Fragment>
-                {console.log(this.props)}
-                <h1>{  this.getLeague() }</h1>
-                {this.props.isLoading && <div>Подождите, идет загрузка</div>}
-                {this.props.isFailed && <div>Ой-ой :(</div>}
-                <ul>
-                    {this.props.countries.map((doc) => (
-                        <div key={doc.match_id }>
-                            <Button component={Link} to={this.getLink(doc.match_id)}>
-                                <div>{doc.match_hometeam_name} {doc.match_hometeam_score} : {doc.match_awayteam_score} {doc.match_awayteam_name}</div>
-                            </Button>
-                        </div>
-                    ))}
-                </ul>
+
+                <div className="schedule">
+                    <div className={"headL"}>
+                        <div className={"leagueName"}>{  this.getLeague() }</div>
+                        <div className="calendar"><Search/></div>
+                    </div>
+                    {this.props.isLoading && <LinearProgress color="secondary" />}
+                    {this.props.isFailed && <img src={"https://okdiario.com/img/2018/03/13/como-calcular-porcentaje-de-error-655x368.jpg"}></img>}
+                    <div className="mathes">
+                        {this.getLeague()!== "No matches" && this.props.countries.map((doc) => (
+                            <div className={"match"} key={doc.match_id }>
+                                <Button component={Link} to={this.getLink(doc.match_id)}>
+                                    {doc.match_id && <div className={"score"}>
+                                            <div className={"time"}>{doc.match_time} </div>
+                                            <div className={"hometeam"}>{doc.match_hometeam_name} </div>
+                                            {doc.match_hometeam_score !== "?" && <div className={"homescore"}>{doc.match_hometeam_score} </div>}
+                                            {doc.match_hometeam_score === "?" && <div className={"homescore"}> </div>}
+                                            <div className={"twopoints"}> : </div>
+                                            {doc.match_hometeam_score !== "?" && <div className={"awayscore"}>{doc.match_awayteam_score} </div>}
+                                            {doc.match_hometeam_score === "?" && <div className={"awayscore"}> </div>}
+                                            <div className={"awayteam"}>{doc.match_awayteam_name} </div>
+
+                                        </div>
+                                    }
+                                </Button>
+                            </div>
+                        ))}
+                    </div>
+
+                </div>
+
 
             </React.Fragment>
         )
@@ -57,14 +80,21 @@ class Schedule extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    selectedArticle: state.article,
-    countries: state.countries,
-    isLoading: state.countriesIsLoading,
-    isFailed: state.countriesLoadFailed
+    selectedArticle: state.app.article,
+    date: state.form.search,
+    countries: state.app.countries,
+    isLoading: state.app.countriesIsLoading,
+    isFailed: state.app.countriesLoadFailed
 });
 
+
+// const dateSelector = (state) => {
+//     if (state.form && state.form.search && state.form.search.values)
+//         return state.form.search.values.page
+// }
+
 const mapDispatchToProps = (dispatch) => ({
-    loadCountries: (game) => loadCountries(dispatch, game)
+    loadCountries: (game, date) => loadCountries(dispatch, game, date)
 });
 
 const ConnectedSchedule = connect(mapStateToProps, mapDispatchToProps)(Schedule);

@@ -10,11 +10,11 @@ export const selectArticle = (article) => {
     }
 };
 
-export const loadCountries = (dispatch, id) => {
+export const loadCountries = (dispatch, id, date) => {
     dispatch({
         type: TYPES.LOAD_COUNTRIES_STARTED
     });
-    axios.get('https://apifootball.com/api/?action=get_events&from=2018-11-01&to=2018-11-09&league_id='+id+'&APIkey=5956c890d985b1cc22e8729723c531ae15a39925004d2f42dfa636d6ef4ea9e8')
+    axios.get('https://apifootball.com/api/?action=get_events&from='+date+'&to='+date+'&league_id='+id+'&APIkey=5956c890d985b1cc22e8729723c531ae15a39925004d2f42dfa636d6ef4ea9e8')
         .then((response) => {
             dispatch({
                 type: TYPES.LOAD_COUNTRIES,

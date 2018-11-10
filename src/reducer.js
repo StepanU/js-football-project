@@ -4,7 +4,8 @@ const initState = {
     countries: [],
     leagues: [],
     game: [],
-    article: 63
+    article: 63,
+    date: '2018-01-01'
 };
 
 export const reducer =(prevState = initState, action) => {

@@ -2,10 +2,9 @@ import React from 'react'
 import {connect} from "react-redux";
 import {loadLeagues, selectArticle} from "../actions";
 import {Link} from 'react-router-dom'
-import Button from "@material-ui/core/Button/Button";
-import MenuList from '@material-ui/core/MenuList';
-import MenuItem from '@material-ui/core/MenuItem';
-import Paper from '@material-ui/core/Paper';
+import Button from "@material-ui/core/Button";
+import LinearProgress from '@material-ui/core/LinearProgress';
+import "../css/main.css"
 
 class Template extends React.Component {
     constructor(props) {
@@ -22,26 +21,20 @@ class Template extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {this.props.isLoading && <div>Подождите, идет загрузка</div>}
+                {this.props.isLoading && <LinearProgress color="secondary" />}
                 {this.props.isFailed && <div>Ой-ой :(</div>}
-                <ul>
+
                     {this.props.leagues.map((doc) => (
-                        <Paper key={doc.league_id}>
-                            <MenuList>
-                                <div >
-                                    <p onClick={() => this.props.selectArticle(doc.league_id)}>
-                                        <MenuItem >
-                                            <Button component={Link} to="/schedule">
+                                    <div  key={doc.league_id} onClick={() => {this.props.selectArticle(doc.league_id)}}>
+                                            <Button   variant="contained" color="primary" className="league" component={Link} to="/schedule">
                                                 {doc.country_name} {doc.league_name}
                                             </Button>
-                                        </MenuItem>
-                                    </p>
-                                </div>
-                            </MenuList>
-                        </Paper>
+                                    </div>
+
+
 
                     ))}
-                </ul>
+
             </React.Fragment>
         )
     }
@@ -49,10 +42,10 @@ class Template extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    selectedArticle: state.article,
-    leagues: state.leagues,
-    isLoading: state.leaguesIsLoading,
-    isFailed: state.leaguesLoadFailed
+    selectedArticle: state.app.article,
+    leagues: state.app.leagues,
+    isLoading: state.app.leaguesIsLoading,
+    isFailed: state.app.leaguesLoadFailed
 });
 
 const mapDispatchToProps = (dispatch) => ({

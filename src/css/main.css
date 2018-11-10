@@ -1,16 +1,169 @@
+*{
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.MuiFormControl-marginNormal-72{
+    margin-top: 0px;
+    margin-bottom: 2px;
+}
 
+
+.MuiButton-root-1{
+    border-radius: 0px;
+}
 .leftBar {
-    background-color: red;
     display: inline-block;
     vertical-align:top;
     width: 20%;
 }
 .rightPart{
-    background-color: limegreen;
+    /*background-color: #F3F2F2;*/
     display: inline-block;
+    vertical-align:top;
     width: 80%;
+    height: 100%;
+
 }
 
-.mainBar{
-    background-color: purple;
+body{
+    background-color: #222;
 }
+
+.pole{
+    height: inherit;
+    width:  80%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    position: relative;
+    display: block;
+}
+
+.MuiButtonBase-root-27{
+    background-color: purple;
+    color: white;
+    height: 10px;
+    width: 100%;
+}
+
+
+.headL{
+    color: black;
+    width: 100%;
+    text-transform: uppercase;
+    border-bottom: 4px solid black;
+
+
+}
+.leagueName{
+    display: inline-block;
+    vertical-align:top;
+    margin-top: 16px;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    height: 100%;
+    width: 75%;
+
+}
+
+.schedule{
+    display: inline-block;
+    vertical-align:top;
+    width: 100%;
+}
+
+.calendar{
+    display: inline-block;
+    vertical-align:top;
+    width: 20%;
+    color: white;
+}
+
+.matches{
+    text-align: center;
+    width: 100%;
+}
+
+.match{
+    border-bottom: 1px solid black;
+}
+
+.score{
+    width: 100%;
+}
+.hometeam{
+    display: inline-block;
+    vertical-align:top;
+    width: 40%;
+    text-align: right;
+}
+
+.homescore{
+    display: inline-block;
+    vertical-align:top;
+    width: 6%;
+    text-align: right;
+
+}
+
+.twopoints{
+    display: inline-block;
+    vertical-align:top;
+    width: 2%;
+    text-align: center;
+}
+
+.awayteam{
+    display: inline-block;
+    vertical-align:top;
+    width: 40%;
+}
+
+.awayscore{
+    display: inline-block;
+    vertical-align:top;
+    width: 6%;
+}
+.time{
+    display: inline-block;
+    vertical-align:top;
+    width: 6%;
+}
+.footer{
+    margin-top: 5px;
+    height: 800px;
+}
+
+.im{
+    margin-top: 5px;
+    width: 100%;
+    margin-bottom: -5px;
+}
+
+.pol{
+    display: inline-block;
+    vertical-align:top;
+    width: 20%;
+    text-align: center;
+    background-color: #E0F0EA;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.main{
+    font-family: Heebo,sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1em;
+    color: #769d9e;
+    margin-bottom: 20px;
+    letter-spacing: -.02em;
+}
+
+.text{
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: -.025em;
+    color: #769d9e;
+    margin: 0;
+}
+

@@ -1,8 +1,8 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {loadGame} from "../actions";
-import Button from "@material-ui/core/Button/Button";
-import {Link} from "react-router-dom";
+import "../css/game.css"
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export class Game extends React.Component {
 
@@ -20,18 +20,29 @@ export class Game extends React.Component {
 
 
 
-                {this.props.isLoading && <div>Подождите, идет загрузка</div>}
+                {this.props.isLoading && <LinearProgress color="secondary" />}
                 {this.props.isFailed && <div>Ой-ой :(</div>}
-                {this.props.game.length > 0 && <div>{this.props.game[0].country_name} {this.props.game[0].league_name}</div>}
-                {this.props.game.length > 0 && <div>{this.props.game[0].match_date}</div>}
-                {this.props.game.length > 0 && <div>{this.props.game[0].match_time}</div>}
-                {this.props.game.length > 0 && this.props.game[0].match_status === "FT" && <div>Матч завершен</div>}
-                {this.props.game.length > 0 && <div>{this.props.game[0].match_hometeam_name} {this.props.game[0].match_hometeam_score} : {this.props.game[0].match_awayteam_score} {this.props.game[0].match_awayteam_name} </div>}
-                {this.props.game.length > 0 && <div>({this.props.game[0].match_hometeam_halftime_score} : {this.props.game[0].match_awayteam_halftime_score})</div>}
-                <div>Statistics:</div>
-                {this.props.game.length > 0 && this.props.game[0].statistics.map((doc) => (
-                    <div key={doc.type }>
-                        <div>{doc.home} {doc.type} {doc.away}</div>
+                {this.props.game.length > 0 && <div className={"gameLeagueName"}>{this.props.game[0].country_name} {this.props.game[0].league_name}</div>}
+                {this.props.game.length > 0 && <div className={"gameDate"}>{this.props.game[0].match_date}</div>}
+                {this.props.game.length > 0 && <div className={"gameTime"}>{this.props.game[0].match_time}</div>}
+                {this.props.game.length > 0 && this.props.game[0].match_status === "FT" && <div className={"gameStatus"}>Match completed</div>}
+                {this.props.game.length > 0 && <div className={"gameScore"}>
+
+                    <div className={"gameHometeamName"}>{this.props.game[0].match_hometeam_name}</div>
+                    {this.props.game[0].match_hometeam_score !== "?" && <div className={"gameHometeamScore"}>{this.props.game[0].match_hometeam_score}</div>}
+                    <div className={"gameTwoPoints"}>:</div>
+                    {this.props.game[0].match_hometeam_score !== "?" && <div className={"gameAwayteamScore"}>{this.props.game[0].match_awayteam_score}</div>}
+                    <div className={"gameAwayteamName"}>{this.props.game[0].match_awayteam_name}</div>
+                </div>}
+                {this.props.game.length > 0 && <div className={"gameHalfScore"}>({this.props.game[0].match_hometeam_halftime_score} : {this.props.game[0].match_awayteam_halftime_score})</div>}
+                {this.props.game.length > 0 && this.props.game[0].statistics.length>0 && <div className={"gameStatistics"}>Statistics:</div>}
+                { this.props.game.length > 0 && this.props.game[0].statistics.map((doc) => (
+                    <div className={"gameStatistic"} key={doc.type }>
+                        <div>
+                            <div className={"gameHometeamStat"}>{doc.home} </div>
+                            <div className={"gameStatType"}>{doc.type} </div>
+                            <div className={"gameAwayteamStat"}>{doc.away}</div>
+                        </div>
                     </div>
                 ))}
 
@@ -48,9 +59,9 @@ export class Game extends React.Component {
 
 
 const mapStateToProps = (state) => ({
-    game: state.game,
-    isLoading: state.isLoading,
-    isFailed: state.isFailed
+    game: state.app.game,
+    isLoading: state.app.isLoading,
+    isFailed: state.app.isFailed
 });
 
 const mapDispatchToProps = (dispatch) => ({
